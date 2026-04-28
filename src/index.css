@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,83 +6,54 @@
 
 @layer base {
   :root {
-    --background: 0 0% 99%;
-    --foreground: 150 20% 8%;
+    /* Премиальная тёмно-зелёная + золото */
+    --background: 150 8% 97%;
+    --foreground: 160 30% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 150 20% 8%;
+    --card-foreground: 160 30% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 150 20% 8%;
+    --popover-foreground: 160 30% 8%;
 
-    --primary: 150 55% 35%;
+    /* Тёмный бутылочный зелёный */
+    --primary: 158 62% 24%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 150 20% 95%;
-    --secondary-foreground: 150 20% 15%;
+    --secondary: 150 18% 94%;
+    --secondary-foreground: 158 30% 15%;
 
-    --muted: 150 10% 96%;
-    --muted-foreground: 150 10% 45%;
+    --muted: 150 10% 95%;
+    --muted-foreground: 150 12% 46%;
 
-    --accent: 82 45% 42%;
+    /* Золотой акцент */
+    --accent: 43 74% 49%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 150 15% 88%;
-    --input: 150 15% 95%;
-    --ring: 150 55% 35%;
+    --border: 150 12% 87%;
+    --input: 150 12% 94%;
+    --ring: 158 62% 24%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 150 20% 8%;
-    --sidebar-primary: 150 55% 35%;
+    --sidebar-foreground: 160 30% 8%;
+    --sidebar-primary: 158 62% 24%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 150 20% 95%;
-    --sidebar-accent-foreground: 150 20% 8%;
-    --sidebar-border: 150 15% 88%;
-    --sidebar-ring: 150 55% 35%;
-  }
+    --sidebar-accent: 150 18% 94%;
+    --sidebar-accent-foreground: 160 30% 8%;
+    --sidebar-border: 150 12% 87%;
+    --sidebar-ring: 158 62% 24%;
 
-  .dark {
-    --background: 150 15% 6%;
-    --foreground: 150 10% 95%;
-
-    --card: 150 15% 9%;
-    --card-foreground: 150 10% 95%;
-
-    --popover: 150 15% 9%;
-    --popover-foreground: 150 10% 95%;
-
-    --primary: 150 55% 42%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 150 15% 13%;
-    --secondary-foreground: 150 10% 90%;
-
-    --muted: 150 15% 13%;
-    --muted-foreground: 150 10% 60%;
-
-    --accent: 82 45% 42%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 150 15% 18%;
-    --input: 150 15% 13%;
-    --ring: 150 55% 42%;
-
-    --sidebar-background: 150 15% 9%;
-    --sidebar-foreground: 150 10% 95%;
-    --sidebar-primary: 150 55% 42%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 150 15% 13%;
-    --sidebar-accent-foreground: 150 10% 95%;
-    --sidebar-border: 150 15% 18%;
-    --sidebar-ring: 150 55% 42%;
+    /* Кастомные токены */
+    --gold: 43 74% 49%;
+    --gold-light: 43 80% 68%;
+    --forest: 158 62% 24%;
+    --forest-light: 150 40% 38%;
+    --forest-pale: 150 30% 94%;
   }
 }
 
@@ -94,20 +65,23 @@
   body {
     @apply bg-background text-foreground;
     font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Lenis заменяет браузерный scroll-behavior */
+    scroll-behavior: auto;
   }
 }
 
 @layer components {
   .font-display {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: "DM Serif Display", "Playfair Display", Georgia, serif;
   }
 
   .font-orbitron {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: "DM Serif Display", "Playfair Display", Georgia, serif;
   }
 
   .font-geist {
@@ -118,6 +92,90 @@
     font-family: "JetBrains Mono", monospace;
   }
 
+  /* =====================
+     REVEAL ANIMATIONS
+     ===================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+      opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition:
+      opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition:
+      opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.93);
+    transition:
+      opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Staggered delays */
+  .delay-100 {
+    transition-delay: 0.1s;
+  }
+  .delay-200 {
+    transition-delay: 0.2s;
+  }
+  .delay-300 {
+    transition-delay: 0.3s;
+  }
+  .delay-400 {
+    transition-delay: 0.4s;
+  }
+  .delay-500 {
+    transition-delay: 0.5s;
+  }
+  .delay-600 {
+    transition-delay: 0.6s;
+  }
+  .delay-700 {
+    transition-delay: 0.7s;
+  }
+  .delay-800 {
+    transition-delay: 0.8s;
+  }
+
+  /* =====================
+     LEGACY ANIMATIONS
+     ===================== */
   .fade-in {
     animation: fadeIn 0.9s ease-out forwards;
     opacity: 0;
@@ -134,6 +192,9 @@
     transform: translateY(30px);
   }
 
+  /* =====================
+     PREMIUM UI
+     ===================== */
   .glow-border {
     position: relative;
     border: 1px solid transparent;
@@ -149,14 +210,69 @@
 
   .hero-overlay {
     background: linear-gradient(
-      135deg,
-      rgba(10, 40, 20, 0.75) 0%,
-      rgba(20, 60, 30, 0.55) 50%,
-      rgba(10, 30, 15, 0.7) 100%
+      160deg,
+      rgba(5, 28, 16, 0.82) 0%,
+      rgba(10, 50, 28, 0.6) 55%,
+      rgba(5, 20, 12, 0.78) 100%
     );
+  }
+
+  /* Золотой подчёркивающий акцент */
+  .gold-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .gold-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--gold)),
+      hsl(var(--gold-light))
+    );
+    border-radius: 2px;
+  }
+
+  /* Премиальная карточка */
+  .premium-card {
+    background: white;
+    border: 1px solid hsl(150 12% 90%);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.04),
+      0 0 0 0 transparent;
+    transition:
+      box-shadow 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .premium-card:hover {
+    box-shadow: 0 12px 40px rgba(15, 70, 40, 0.12);
+    border-color: hsl(150 35% 75%);
+    transform: translateY(-3px);
+  }
+
+  /* Золотая горизонтальная линия-декор */
+  .gold-line {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--gold)),
+      hsl(var(--gold-light))
+    );
+    border-radius: 2px;
   }
 }
 
+/* =====================
+   KEYFRAMES
+   ===================== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -193,10 +309,10 @@
 @keyframes pulseGreen {
   0%,
   100% {
-    box-shadow: 0 0 0 0 hsla(150, 55%, 35%, 0.4);
+    box-shadow: 0 0 0 0 hsla(158, 62%, 24%, 0.45);
   }
   50% {
-    box-shadow: 0 0 0 12px hsla(150, 55%, 35%, 0);
+    box-shadow: 0 0 0 14px hsla(158, 62%, 24%, 0);
   }
 }
 
@@ -209,9 +325,18 @@
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-6px);
+    transform: translateY(-7px);
   }
   60% {
     transform: translateY(-3px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
   }
 }
