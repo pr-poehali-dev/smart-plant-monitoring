@@ -29,15 +29,17 @@ const faqs = [
 
 export function FAQSection() {
   return (
-    <section id="faq" className="py-28 bg-[hsl(150,8%,97%)]">
+    <section id="faq" className="py-28 relative" style={{ background: "#0a1f12" }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 reveal">
           <div className="gold-line mx-auto mb-6" />
-          <p className="text-sm font-semibold tracking-widest uppercase text-[hsl(43,74%,44%)] mb-3">
+          <p className="text-sm font-semibold tracking-[0.3em] uppercase mb-4" style={{ color: "hsl(43,80%,60%)" }}>
             Частые вопросы
           </p>
-          <h2 className="font-display text-4xl md:text-5xl text-gray-900 mb-4">Отвечаем на вопросы</h2>
-          <p className="text-lg text-gray-500 max-w-xl mx-auto">
+          <h2 className="font-display text-4xl md:text-6xl text-white mb-5 leading-tight">
+            Отвечаем на <span className="gold-text italic">вопросы</span>
+          </h2>
+          <p className="text-lg text-white/55 max-w-xl mx-auto">
             Всё, что нужно знать перед началом работы с нами
           </p>
         </div>
@@ -48,12 +50,16 @@ export function FAQSection() {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-white border border-gray-200 rounded-2xl px-7 overflow-hidden data-[state=open]:border-[hsl(150,35%,75%)] transition-colors"
+                className="rounded-2xl px-7 overflow-hidden transition-all duration-300"
+                style={{
+                  background: "linear-gradient(145deg, hsl(158,28%,9%), hsl(158,25%,7%))",
+                  border: "1px solid hsl(158,22%,16%)",
+                }}
               >
-                <AccordionTrigger className="text-left text-base font-semibold text-gray-900 hover:text-[hsl(158,62%,24%)] py-5 hover:no-underline">
+                <AccordionTrigger className="text-left text-base font-semibold text-white hover:text-[hsl(43,80%,65%)] py-5 hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-500 leading-relaxed pb-6">
+                <AccordionContent className="text-white/60 leading-relaxed pb-6">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

@@ -14,17 +14,21 @@ const services = [
 
 export function FeaturesSection() {
   return (
-    <section id="services" className="py-28 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-6 reveal">
+    <section id="services" className="py-28 px-6 relative" style={{ background: "hsl(158,30%,5%)" }}>
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(220,175,70,0.06) 0%, transparent 50%)" }}
+      />
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-16 reveal">
           <div className="gold-line mx-auto mb-6" />
-          <p className="text-sm font-semibold tracking-widest uppercase text-[hsl(43,74%,44%)] mb-3">
+          <p className="text-sm font-semibold tracking-[0.3em] uppercase mb-4" style={{ color: "hsl(43,80%,60%)" }}>
             Наши услуги
           </p>
-          <h2 className="font-display text-4xl md:text-5xl text-gray-900 mb-4">
-            Комплексное благоустройство
+          <h2 className="font-display text-4xl md:text-6xl text-white mb-5 leading-tight">
+            Комплексное <span className="gold-text italic">благоустройство</span>
           </h2>
-          <p className="text-lg text-gray-500 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/55 max-w-xl mx-auto leading-relaxed">
             Берёмся за проекты любой сложности — от небольших дорожек до масштабного озеленения парков
           </p>
         </div>
@@ -35,18 +39,16 @@ export function FeaturesSection() {
               key={index}
               className={`premium-card reveal delay-${Math.min((index % 3) * 100 + 100, 400)} rounded-2xl p-7 group cursor-default`}
             >
-              <div className="w-11 h-11 rounded-xl bg-[hsl(150,30%,94%)] flex items-center justify-center mb-5 group-hover:bg-[hsl(158,62%,24%)] transition-colors duration-300">
-                <Icon
-                  name={service.icon}
-                  fallback="Leaf"
-                  size={20}
-                  className="text-[hsl(158,62%,24%)] group-hover:text-white transition-colors duration-300"
-                />
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-400"
+                style={{ background: "rgba(218,175,90,0.08)", border: "1px solid rgba(218,175,90,0.2)" }}
+              >
+                <Icon name={service.icon} fallback="Leaf" size={22} style={{ color: "hsl(43,80%,65%)" }} />
               </div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-[hsl(158,62%,24%)] transition-colors">
+              <h3 className="text-base font-semibold text-white mb-2 group-hover:text-[hsl(43,80%,70%)] transition-colors duration-300">
                 {service.title}
               </h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{service.description}</p>
+              <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
             </div>
           ))}
         </div>

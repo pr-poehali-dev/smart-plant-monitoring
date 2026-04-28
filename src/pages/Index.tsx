@@ -20,17 +20,27 @@ export default function Index() {
           }
         })
       },
-      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -80px 0px" }
     )
 
-    const elements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale")
+    const elements = document.querySelectorAll(
+      ".reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-mask"
+    )
     elements.forEach((el) => observer.observe(el))
 
-    return () => observer.disconnect()
+    const handleScroll = () => {
+      document.documentElement.style.setProperty("--scroll-y", String(window.scrollY))
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   return (
-    <div>
+    <div className="bg-background min-h-screen">
       <Navbar />
       <main>
         <Hero3D />

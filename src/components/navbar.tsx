@@ -25,59 +25,53 @@ export function Navbar() {
       style={
         scrolled
           ? {
-              background: "rgba(255,255,255,0.97)",
-              backdropFilter: "blur(16px)",
-              boxShadow: "0 1px 0 rgba(0,0,0,0.07), 0 4px 24px rgba(0,0,0,0.06)",
+              background: "rgba(10, 28, 18, 0.85)",
+              backdropFilter: "blur(20px)",
+              borderBottom: "1px solid rgba(218, 175, 90, 0.15)",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
             }
           : { background: "transparent" }
       }
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="flex items-center justify-between h-16 md:h-[68px]">
-          <a href="#" className="flex items-center gap-3 flex-shrink-0">
+        <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? "h-20" : "h-24"}`}>
+          <a href="#" className="flex items-center gap-4 flex-shrink-0">
             <img
               src="https://cdn.poehali.dev/projects/7805d22d-24ea-4cdf-a547-7b2a521ffa88/bucket/5f99dc68-1f1f-4ebb-a4c0-07bbf3795255.jpg"
               alt="VashLandshaft"
-              className="h-9 w-9 object-contain rounded-full"
+              className={`object-contain rounded-full transition-all duration-500 ${scrolled ? "h-14 w-14" : "h-16 w-16"}`}
+              style={{
+                boxShadow: "0 0 0 2px rgba(218,175,90,0.3), 0 8px 24px rgba(0,0,0,0.5)",
+              }}
             />
             <span
-              className="font-display text-xl font-bold transition-colors duration-400"
-              style={{ color: scrolled ? "hsl(158,62%,20%)" : "white" }}
+              className={`font-display font-bold transition-all duration-500 text-white ${scrolled ? "text-2xl" : "text-3xl"}`}
             >
-              Vash
-              <span style={{ color: scrolled ? "hsl(43,74%,44%)" : "hsl(43,80%,65%)" }}>Landshaft</span>
+              Vash<span className="gold-text">Landshaft</span>
             </span>
           </a>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-9">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium transition-colors duration-200"
-                style={{ color: scrolled ? "#444" : "rgba(255,255,255,0.85)" }}
-                onMouseEnter={(e) => { (e.target as HTMLElement).style.color = "hsl(158,62%,30%)" }}
-                onMouseLeave={(e) => { (e.target as HTMLElement).style.color = scrolled ? "#444" : "rgba(255,255,255,0.85)" }}
+                className="text-sm font-medium text-white/80 hover:text-[hsl(43,80%,65%)] transition-colors duration-300"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href="tel:+79919919169"
-              className="text-sm font-medium transition-colors duration-200"
-              style={{ color: scrolled ? "#444" : "rgba(255,255,255,0.85)" }}
-            >
+          <div className="hidden md:flex items-center gap-5">
+            <a href="tel:+79919919169" className="text-sm font-medium text-white/80 hover:text-[hsl(43,80%,65%)] transition-colors duration-300">
               +7 991 991-91-69
             </a>
             <Button
-              className="text-sm px-5 py-2 border-0 font-semibold"
+              className="text-sm px-6 py-2.5 border-0 font-semibold text-[#1a1200]"
               style={{
-                background: "linear-gradient(135deg, hsl(158,62%,22%), hsl(158,55%,32%))",
-                color: "white",
-                boxShadow: "0 2px 12px rgba(15,70,40,0.25)",
+                background: "linear-gradient(135deg, #c9a43a, #f0d878)",
+                boxShadow: "0 4px 20px rgba(218,175,90,0.3)",
               }}
               onClick={() => document.getElementById("contacts")?.scrollIntoView({ behavior: "smooth" })}
             >
@@ -87,38 +81,32 @@ export function Navbar() {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden transition-colors duration-200"
-            style={{ color: scrolled ? "#333" : "white" }}
+            className="md:hidden text-white transition-colors duration-200"
           >
-            <Icon name={isOpen ? "X" : "Menu"} size={24} />
+            <Icon name={isOpen ? "X" : "Menu"} size={26} />
           </button>
         </div>
 
         {isOpen && (
-          <div className="md:hidden bg-white border-t" style={{ borderColor: "hsl(150,15%,90%)" }}>
-            <div className="px-4 pt-3 pb-5 space-y-1">
+          <div className="md:hidden" style={{ background: "rgba(10,28,18,0.97)", borderTop: "1px solid rgba(218,175,90,0.15)" }}>
+            <div className="px-4 pt-4 pb-6 space-y-1.5">
               {links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block px-3 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-green-50 transition-colors"
-                  style={{ color: "hsl(158,30%,18%)" }}
+                  className="block px-3 py-3 text-white/85 hover:text-[hsl(43,80%,65%)] font-medium rounded-lg transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="pt-3 border-t space-y-2" style={{ borderColor: "hsl(150,15%,90%)" }}>
-                <a
-                  href="tel:+79919919169"
-                  className="block px-3 py-2 font-semibold text-sm"
-                  style={{ color: "hsl(158,62%,22%)" }}
-                >
+              <div className="pt-3 mt-2 space-y-3" style={{ borderTop: "1px solid rgba(218,175,90,0.15)" }}>
+                <a href="tel:+79919919169" className="block px-3 py-2 font-semibold text-sm" style={{ color: "hsl(43,80%,65%)" }}>
                   +7 991 991-91-69
                 </a>
                 <Button
-                  className="w-full border-0 font-semibold"
-                  style={{ background: "linear-gradient(135deg, hsl(158,62%,22%), hsl(158,55%,32%))", color: "white" }}
+                  className="w-full border-0 font-semibold text-[#1a1200]"
+                  style={{ background: "linear-gradient(135deg, #c9a43a, #f0d878)" }}
                   onClick={() => {
                     setIsOpen(false)
                     document.getElementById("contacts")?.scrollIntoView({ behavior: "smooth" })

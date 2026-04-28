@@ -4,51 +4,81 @@ import Icon from "@/components/ui/icon"
 
 const HERO_IMAGE =
   "https://cdn.poehali.dev/projects/7805d22d-24ea-4cdf-a547-7b2a521ffa88/files/9e7efe61-10b5-425a-9d51-87b3730f3bca.jpg"
+const LOGO =
+  "https://cdn.poehali.dev/projects/7805d22d-24ea-4cdf-a547-7b2a521ffa88/bucket/5f99dc68-1f1f-4ebb-a4c0-07bbf3795255.jpg"
 
 export const Hero3DWebGL = () => {
   const [phase, setPhase] = useState(0)
+  const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 200)
     const t2 = setTimeout(() => setPhase(2), 800)
     const t3 = setTimeout(() => setPhase(3), 1400)
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
+
+    const onScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", onScroll, { passive: true })
+
+    return () => {
+      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3)
+      window.removeEventListener("scroll", onScroll)
+    }
   }, [])
 
+  // Parallax значения
+  const imgTransform = `scale(${phase >= 1 ? 1 + scrollY * 0.0003 : 1.08}) translateY(${scrollY * 0.4}px)`
+  const contentTransform = `translateY(${scrollY * 0.2}px)`
+  const contentOpacity = Math.max(0, 1 - scrollY / 600)
+
   return (
-    <div className="relative h-screen min-h-[640px] overflow-hidden bg-[#071a0e]">
+    <div className="relative h-screen min-h-[680px] overflow-hidden bg-[#040e08]">
       <img
         src={HERO_IMAGE}
         alt="Ландшафтный дизайн VashLandshaft"
-        className="absolute inset-0 w-full h-full object-cover object-center scale-105 transition-transform duration-[8000ms] ease-out"
-        style={{ transform: phase >= 1 ? "scale(1)" : "scale(1.08)" }}
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ transform: imgTransform, transition: phase >= 1 ? "transform 0.1s linear" : "transform 8s ease-out" }}
       />
 
-      {/* Премиальное наложение с тёмным лесным тоном */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(160deg, rgba(4,20,10,0.85) 0%, rgba(8,40,22,0.62) 50%, rgba(4,16,8,0.82) 100%)",
+          background: "linear-gradient(160deg, rgba(2,12,6,0.88) 0%, rgba(4,28,16,0.55) 50%, rgba(2,10,5,0.92) 100%)",
         }}
       />
 
-      {/* Золотой блик снизу слева */}
       <div
         className="absolute bottom-0 left-0 w-2/3 h-1/2 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse at 0% 100%, rgba(180,140,40,0.12) 0%, transparent 60%)",
-        }}
+        style={{ background: "radial-gradient(ellipse at 0% 100%, rgba(220,175,70,0.12) 0%, transparent 60%)" }}
       />
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10">
-        {/* Бейдж */}
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10"
+        style={{ transform: contentTransform, opacity: contentOpacity }}
+      >
+        {/* БОЛЬШОЙ ЛОГОТИП */}
         <div
-          className="flex items-center gap-2 rounded-full px-5 py-2 mb-8 text-sm font-medium text-white/90 transition-all duration-700"
+          className="mb-8 transition-all duration-1000"
           style={{
-            background: "rgba(255,255,255,0.08)",
-            border: "1px solid rgba(255,255,255,0.18)",
-            backdropFilter: "blur(8px)",
+            opacity: phase >= 1 ? 1 : 0,
+            transform: phase >= 1 ? "scale(1)" : "scale(0.8)",
+          }}
+        >
+          <img
+            src={LOGO}
+            alt="VashLandshaft"
+            className="h-32 md:h-40 lg:h-48 w-auto object-contain"
+            style={{
+              filter: "drop-shadow(0 12px 40px rgba(0,0,0,0.6))",
+            }}
+          />
+        </div>
+
+        <div
+          className="flex items-center gap-2 rounded-full px-5 py-2 mb-7 text-sm font-medium text-white/90 transition-all duration-700"
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            border: "1px solid rgba(218,175,90,0.25)",
+            backdropFilter: "blur(10px)",
             opacity: phase >= 1 ? 1 : 0,
             transform: phase >= 1 ? "translateY(0)" : "translateY(12px)",
           }}
@@ -57,9 +87,8 @@ export const Hero3DWebGL = () => {
           Санкт-Петербург и Ленинградская область
         </div>
 
-        {/* Заголовок */}
         <h1
-          className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight max-w-4xl transition-all duration-700"
+          className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-[1.1] max-w-4xl transition-all duration-700"
           style={{
             opacity: phase >= 2 ? 1 : 0,
             transform: phase >= 2 ? "translateY(0)" : "translateY(20px)",
@@ -67,20 +96,11 @@ export const Hero3DWebGL = () => {
         >
           Всё для вашего участка
           <br />
-          <span
-            style={{
-              background: "linear-gradient(90deg, #c8a43a, #f0d878, #c8a43a)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            в одном месте
-          </span>
+          <span className="gold-text">в одном месте</span>
         </h1>
 
-        {/* Подзаголовок */}
         <p
-          className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700"
+          className="text-white/65 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700"
           style={{
             opacity: phase >= 2 ? 1 : 0,
             transform: phase >= 2 ? "translateY(0)" : "translateY(16px)",
@@ -92,7 +112,6 @@ export const Hero3DWebGL = () => {
           Команда 42 профессионалов с опытом более 15 лет.
         </p>
 
-        {/* Кнопки */}
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center transition-all duration-700"
           style={{
@@ -102,8 +121,8 @@ export const Hero3DWebGL = () => {
         >
           <Button
             size="lg"
-            className="text-lg px-9 py-6 border-0 font-semibold shadow-2xl pulse-button"
-            style={{ background: "linear-gradient(135deg, #b8902e, #e8c96a)", color: "#1a1200" }}
+            className="text-lg px-9 py-6 border-0 font-semibold pulse-button"
+            style={{ background: "linear-gradient(135deg, #c9a43a, #f0d878)", color: "#1a1200" }}
             onClick={() => document.getElementById("contacts")?.scrollIntoView({ behavior: "smooth" })}
           >
             <Icon name="Phone" size={18} className="mr-2" />
@@ -121,17 +140,15 @@ export const Hero3DWebGL = () => {
         </div>
       </div>
 
-      {/* Стрелка скролла */}
       <button
-        className="absolute bottom-10 left-0 right-0 flex justify-center z-10 text-white/50 hover:text-white/80 transition-colors"
+        className="absolute bottom-10 left-0 right-0 flex justify-center z-10 text-white/50 hover:text-[hsl(43,80%,65%)] transition-colors"
         onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
         style={{ animation: "bounce 2s ease-in-out infinite" }}
       >
         <Icon name="ChevronDown" size={32} />
       </button>
 
-      {/* Градиент в секцию статистики */}
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#0d2b1a] to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a1f12] to-transparent z-10" />
     </div>
   )
 }

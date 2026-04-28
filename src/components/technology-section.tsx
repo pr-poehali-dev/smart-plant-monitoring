@@ -7,29 +7,25 @@ const stats = [
 
 export function TechnologySection() {
   return (
-    <section className="py-20 bg-[#0d2b1a] relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden grain" style={{ background: "#0a1f12" }}>
       <div
-        className="absolute inset-0 opacity-25"
+        className="absolute inset-0 opacity-30 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 50%, rgba(180,150,60,0.35) 0%, transparent 55%), radial-gradient(circle at 80% 50%, rgba(20,90,50,0.5) 0%, transparent 55%)",
+            "radial-gradient(circle at 15% 50%, rgba(220,175,70,0.18) 0%, transparent 50%), radial-gradient(circle at 85% 50%, rgba(30,120,70,0.25) 0%, transparent 55%)",
         }}
       />
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
           {stats.map((stat, i) => (
-            <div key={i} className={`reveal delay-${i * 100 + 100}`}>
-              <div
-                className="font-display text-5xl md:text-6xl font-bold mb-3"
-                style={{
-                  background: "linear-gradient(135deg, #e8c96a, #f5e0a0)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
+            <div
+              key={i}
+              className={`reveal-scale delay-${i * 100 + 100}`}
+            >
+              <div className="font-display text-5xl md:text-7xl font-bold mb-3 gold-text">
                 {stat.value}
               </div>
-              <div className="text-green-300/80 text-sm md:text-base leading-snug">{stat.label}</div>
+              <div className="text-white/55 text-sm md:text-base leading-snug">{stat.label}</div>
             </div>
           ))}
         </div>
